@@ -92,7 +92,7 @@ public class DataStructureTester extends Application {
          */
         MenuItem newCanvas = new MenuItem("New");
         newCanvas.setOnAction((ActionEvent e) -> {
-
+            taData.clear();
         });
         fileMenu.getItems().add(newCanvas);
 
@@ -126,9 +126,19 @@ public class DataStructureTester extends Application {
          * Data Menu Section
          */
         MenuItem miGenerateIntegers = new MenuItem("Generate Integers");
+        miGenerateIntegers.setOnAction(e -> {
+            for (int i=0; i< 1000; i++){
+                taData.appendText("" + i + "\n");
+            }
+        });
         dataMenu.getItems().add(miGenerateIntegers);
 
         MenuItem miRandom = new MenuItem("Randomize Data");
+        miRandom.setOnAction(e->{
+            //*************************************TODO: Make this work!******
+            
+        });
+        
         dataMenu.getItems().add(miRandom);
 
         /**
@@ -201,6 +211,24 @@ public class DataStructureTester extends Application {
         }
     }
 
+   public static int[] text2IntArray(String s, int n){
+       Scanner sc = new Scanner(s);
+       int[] nums = new int[n];
+       for(int i=0; sc.hasNextInt(); i++){
+           nums[i] = sc.nextInt();
+       }
+       return nums;
+   } 
+    
+   public static String intArray2Text(int[] a){
+       StringBuilder sb = new StringBuilder();
+       String newLine = "\n";
+       for (int value : a) {
+           sb.append(Integer.toString(value)).append(newLine);
+       }
+       return sb.toString();
+   }
+   
     /**
      * @param args the command line arguments
      */
