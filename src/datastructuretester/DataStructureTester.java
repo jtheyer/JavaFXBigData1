@@ -19,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import static sort.SimpleSorts.bubbleSort;
 
 /**
  * A JavaFX 8 program to help experiment with data structures and algorithms.
@@ -145,6 +146,20 @@ public class DataStructureTester extends Application {
          * *********************************************************************
          * Sort Menu Section
          */
+        MenuItem miBubbleSortDsc = new MenuItem("Bubble Sort Decending");
+        miBubbleSortDsc.setOnAction(e -> {
+            int n = taData.getLength();//find out how many lines in text area
+            MyTimer.startMicroTime();
+            int[] nums = text2IntArray(taData.toString(), n);
+            MyTimer.stopMicroTime();
+            taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + " µs");
+            MyTimer.startMicroTime();
+            bubbleSort(nums, "D");
+            taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + " µs");
+            taData.setText(intArray2Text(nums));
+        });
+        sortMenu.getItems().add(miBubbleSortDsc);
+        
         MenuItem miSelectionSortAsc = new MenuItem("Selection Sort Ascending");
         sortMenu.getItems().add(miSelectionSortAsc);
 
