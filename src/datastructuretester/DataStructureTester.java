@@ -20,11 +20,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import static sort.ComplexSort.mergeSort;
 import static sort.SimpleSorts.bubbleSort;
 
 /**
  * A JavaFX 8 program to help experiment with data structures and algorithms.
- * For homework, add a selection sort.
+ * For homework, add a selection sort(a&descending).
+ *
  * @author J
  */
 public class DataStructureTester extends Application {
@@ -183,6 +185,18 @@ public class DataStructureTester extends Application {
 
         MenuItem miMergeSortAsc = new MenuItem("Merge Sort Ascending");
         sortMenu.getItems().add(miMergeSortAsc);
+
+        miMergeSortAsc.setOnAction(e -> {
+            MyTimer.startMicroTime();
+            int[] nums = text2IntArray(taData.getText());
+            taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            mergeSort(nums, "A");
+            taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            taData.setText(intArray2Text(nums));
+            taStatus.appendText("\nArray to text finished in " + MyTimer.stopMicroTime() + "us");
+        });
 
         MenuItem miMergeSortDsc = new MenuItem("Merge Sort Descending");
         sortMenu.getItems().add(miMergeSortDsc);
