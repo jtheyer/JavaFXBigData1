@@ -200,6 +200,18 @@ public class DataStructureTester extends Application {
 
         MenuItem miMergeSortDsc = new MenuItem("Merge Sort Descending");
         sortMenu.getItems().add(miMergeSortDsc);
+        
+        miMergeSortDsc.setOnAction(e -> {
+            MyTimer.startMicroTime();
+            int[] nums = text2IntArray(taData.getText());
+            taStatus.setText("Converting text to array took " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            mergeSort(nums, "D");
+            taStatus.appendText("\nSort finished in " + MyTimer.stopMicroTime() + "us");
+            MyTimer.startMicroTime();
+            taData.setText(intArray2Text(nums));
+            taStatus.appendText("\nArray to text finished in " + MyTimer.stopMicroTime() + "us");
+        });
 
         /**
          * *********************************************************************
